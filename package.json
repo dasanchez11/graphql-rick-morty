@@ -1,0 +1,32 @@
+{
+  "name": "blossom-technical-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc src/index.ts",
+    "start": "npm run compile && node ./dist/index.js",
+    "start:dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec \"npm run compile && node ./dist/index.js\"",
+    "db:create": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "sequelize-typescript": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.12.12",
+    "@types/sequelize": "^4.28.20",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
