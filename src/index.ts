@@ -9,6 +9,7 @@ import { CharacterResolver } from "./character";
 import { buildSchema } from "type-graphql";
 import { RequestLogMiddleware } from "./shared/middlewares";
 import useragent from "express-useragent";
+import { runCharactersCronJob } from "./database/cron-jobs/characters-cron";
 
 interface MyContext {
   token?: string;
@@ -17,6 +18,9 @@ interface MyContext {
 const executeMain = async () => {
   const app = express();
   const httpServer = http.createServer(app);
+
+  runCharactersCronJob();
+
   app.use(useragent.express());
   const schema = await buildSchema({
     resolvers: [CharacterResolver],

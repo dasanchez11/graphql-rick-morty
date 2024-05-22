@@ -35,7 +35,6 @@ Character.init(
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: () => uuidv4(),
     },
     name: {
       type: DataTypes.STRING,

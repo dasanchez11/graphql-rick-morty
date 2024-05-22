@@ -9,7 +9,7 @@
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
     "db:seed": "sequelize db:seed:all",
-    "db:unseed:": "sequelize db:seed:undo "
+    "db:unseed": "sequelize db:seed:undo "
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "graphql": "^16.8.1",
     "ioredis": "^5.4.1",
     "moment": "^2.30.1",
+    "node-cron": "^3.0.3",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
@@ -37,6 +38,7 @@
     "@types/express-useragent": "^1.0.5",
     "@types/moment": "^2.13.0",
     "@types/node": "^20.12.12",
+    "@types/node-cron": "^3.0.11",
     "@types/sequelize": "^4.28.20",
     "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",

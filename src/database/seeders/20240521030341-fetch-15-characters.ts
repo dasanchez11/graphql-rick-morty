@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 export default {
   async up(queryInterface: QueryInterface) {
     const { data } = await getFetchCharacters(1);
-    const characters = data.results.map((result) => {
-      const { status, species, gender, name, origin } = result;
+    const characters = data.results.slice(0, 15).map((result) => {
+      const { id, status, species, gender, name, origin } = result;
       return {
-        id: uuidv4(),
+        id,
         status,
         species,
         gender,
