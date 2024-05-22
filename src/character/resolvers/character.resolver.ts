@@ -12,7 +12,6 @@ export class CharacterResolver {
   async characters(
     @Args() filters: CharactersQueryArgsDTO
   ): Promise<CharacterService[]> {
-    console.log({ filters });
     const searchArgs = Object.keys(filters).reduce((searchArgs, key) => {
       const argument = filters[key as keyof typeof filters];
       if (argument !== undefined) {

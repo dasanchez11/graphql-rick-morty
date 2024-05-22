@@ -7,6 +7,8 @@ import http from "http";
 import cors from "cors";
 import { CharacterResolver } from "./character";
 import { buildSchema } from "type-graphql";
+import { RequestLogMiddleware } from "./shared/middlewares";
+import useragent from "express-useragent";
 
 interface MyContext {
   token?: string;
@@ -15,7 +17,7 @@ interface MyContext {
 const executeMain = async () => {
   const app = express();
   const httpServer = http.createServer(app);
-
+  app.use(useragent.express());
   const schema = await buildSchema({
     resolvers: [CharacterResolver],
     emitSchemaFile: true,
@@ -30,18 +32,21 @@ const executeMain = async () => {
     .start()
     .then(() => {
       app.use(
-        "/",
+        "/graphql",
         cors<cors.CorsRequest>(),
         express.json(),
         expressMiddleware(server, {
-          context: async ({ req }) => ({ token: req.headers.token }),
+          context: async ({ req, res }) => {
+            RequestLogMiddleware(req, res);
+            return { token: req.headers.token };
+          },
         })
       );
     })
     .then(() => {
       const PORT = 3000;
       httpServer.listen({ port: PORT });
-      console.log(`🚀 Server ready at http://localhost:${PORT}/`);
+      console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
     });
 };
 
