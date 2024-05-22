@@ -1,1 +1,1 @@
-export * from "./query.resolver";
+export * from "./character.resolver";

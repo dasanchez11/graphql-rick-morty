@@ -9,7 +9,7 @@ import {
 } from "sequelize";
 
 import { v4 as uuidv4 } from "uuid";
-import { CharacterStatus } from "../../character";
+import { CharacterStatus, CharacterGender } from "../../character";
 import sequelizeConnection from "../connection";
 
 export class Character extends Model<
@@ -53,7 +53,11 @@ Character.init(
     origin: {
       type: DataTypes.STRING,
     },
-    gender: DataTypes.ENUM("Male", "Female", "Unknow"),
+    gender: DataTypes.ENUM(
+      CharacterGender.male,
+      CharacterGender.female,
+      CharacterGender.unknown
+    ),
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   },

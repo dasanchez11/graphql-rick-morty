@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { FetchedCharacters } from "../models/fetch-character.model";
+import { FetchedCharacters } from "../interfaces/fetch-character.interface";
 
 export const getFetchCharacters = (
   page: 1

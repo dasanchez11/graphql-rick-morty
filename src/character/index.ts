@@ -1,3 +1,5 @@
-export * from "./models";
-export * from "./services";
+export * from "./Dto";
+export * from "./interfaces";
 export * from "./resolvers";
+export * from "./schema";
+export * from "./services";

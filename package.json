@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "compile": "ts-node src/index.ts",
+    "compile": "tsc",
     "start": "npm run compile && node ./dist/index.js",
     "start:dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec \"npm run compile && node ./dist/index.js\"",
     "db:create": "sequelize db:create",
-    "db:migrate": "sequelize db:migrate"
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all",
+    "db:unseed:": "sequelize db:seed:undo "
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
+    "ioredis": "^5.4.1",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
