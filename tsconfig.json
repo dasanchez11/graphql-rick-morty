@@ -8,7 +8,9 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "CommonJS",
     "noImplicitAny": true,
     "noImplicitReturns": false,
     "noImplicitThis": true,
@@ -21,8 +23,8 @@
     "moduleResolution": "Node",
     "target": "es2020",
     "typeRoots": ["./src/typings", "../../node_modules/@types"],
-    "outDir": "build"
+    "outDir": "dist"
   },
   "include": ["./src/**/*.ts", "src/configs.ts"],
-  "exclude": ["node_modules", "build", "dist"]
+  "exclude": ["node_modules", "dist", "dist"]
 }

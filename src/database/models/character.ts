@@ -1,45 +1,64 @@
 import {
-  Column,
-  CreatedAt,
-  DataType,
-  Table,
-  UpdatedAt,
+  InferAttributes,
+  InferCreationAttributes,
+  CreateOptions,
+  CreationOptional,
+  DataTypes,
+  Sequelize,
   Model,
-  HasOne,
-} from "sequelize-typescript";
+} from "sequelize";
 
-import { Location } from "./location";
+import { v4 as uuidv4 } from "uuid";
+import { CharacterStatus } from "../../character";
+import sequelizeConnection from "../connection";
 
-@Table({
-  timestamps: true,
-  tableName: "characters",
-  modelName: "Character",
-  createdAt: true,
-  updatedAt: true,
-})
-export class Character extends Model {
-  @Column({
-    primaryKey: true,
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  })
-  id: string;
-
-  @Column({
-    type: DataType.STRING,
-  })
-  name: string;
-
-  @Column({
-    type: DataType.ENUM("Alive", "Dead", "Unknown"),
-  })
-  status: string;
-
-  @Column({
-    type: DataType.STRING,
-  })
-  species: string;
-
-  @HasOne(() => Location)
-  location: Location;
+export class Character extends Model<
+  InferAttributes<Character>,
+  InferCreationAttributes<Character>
+> {
+  declare id: string;
+  declare name: string;
+  declare status: CreateOptions<
+    CharacterStatus.alive | CharacterStatus.dead | CharacterStatus.unknown
+  >;
+  declare species: string;
+  declare origin: string;
+  declare gender: string;
+  // createdAt can be undefined during creation
+  declare createdAt: CreationOptional<Date>;
+  // updatedAt can be undefined during creation
+  declare updatedAt: CreationOptional<Date>;
 }
+
+Character.init(
+  {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: () => uuidv4(),
+    },
+    name: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        CharacterStatus.alive,
+        CharacterStatus.dead,
+        CharacterStatus.unknown
+      ),
+    },
+    species: {
+      type: DataTypes.STRING,
+    },
+    origin: {
+      type: DataTypes.STRING,
+    },
+    gender: DataTypes.ENUM("Male", "Female", "Unknow"),
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+  },
+  {
+    sequelize: sequelizeConnection,
+    tableName: "Characters",
+  }
+);

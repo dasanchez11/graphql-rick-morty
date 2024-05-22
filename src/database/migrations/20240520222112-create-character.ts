@@ -1,4 +1,5 @@
-import { QueryInterface, DataTypes, fn, UUIDV4 } from "sequelize";
+import { QueryInterface, DataTypes, literal } from "sequelize";
+import { v4 as uuidv4 } from "uuid";
 
 /** @type {import('sequelize-cli').Migration} */
 export default {
@@ -21,23 +22,19 @@ export default {
       gender: {
         type: Sequelize.STRING,
       },
+      origin: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
-    });
-    await queryInterface.addColumn("Locations", "locationId", {
-      type: Sequelize.UUID,
-      references: {
-        model: "Locations",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "SET NULL",
     });
   },
   async down(queryInterface: QueryInterface) {

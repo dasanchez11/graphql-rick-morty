@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc src/index.ts",
+    "compile": "ts-node src/index.ts",
     "start": "npm run compile && node ./dist/index.js",
     "start:dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec \"npm run compile && node ./dist/index.js\"",
     "db:create": "sequelize db:create",
@@ -15,17 +15,23 @@
   "description": "",
   "dependencies": {
     "@apollo/server": "^4.10.4",
+    "axios": "^1.7.1",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
     "pg": "^8.11.5",
+    "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
     "sequelize-cli": "^6.6.2",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "type-graphql": "^2.0.0-rc.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/node": "^20.12.12",
     "@types/sequelize": "^4.28.20",
+    "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
