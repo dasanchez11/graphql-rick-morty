@@ -5,11 +5,12 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import express from "express";
 import http from "http";
 import cors from "cors";
-import { CharacterResolver } from "./character";
+import { CharacterResolver, CharacterService } from "./character";
 import { buildSchema } from "type-graphql";
 import { RequestLogMiddleware } from "./shared/middlewares";
 import useragent from "express-useragent";
 import { runCharactersCronJob } from "./database/cron-jobs/characters-cron";
+import { Container } from "typedi";
 
 interface MyContext {
   token?: string;
@@ -25,6 +26,7 @@ const executeMain = async () => {
   const schema = await buildSchema({
     resolvers: [CharacterResolver],
     emitSchemaFile: true,
+    container: Container.of(),
   });
 
   const server = new ApolloServer<MyContext>({

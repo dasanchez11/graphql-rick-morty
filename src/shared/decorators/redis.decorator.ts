@@ -5,7 +5,7 @@ export const RedisCache =
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): void => {
     const originalMethod = descriptor.value;
 
-    descriptor.value = async (...args: any[]) => {
+    descriptor.value = async function (...args: any[]) {
       const cacheKey = `${propertyKey}:${JSON.stringify(args)}`;
       const cachedValue = await redisClient.get(cacheKey);
 
