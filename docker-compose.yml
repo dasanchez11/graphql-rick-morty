@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  graphqlapi:
+    container_name: rick-and-morty-api
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+     - 4000:3000
+    command: npm run start
   rickAndMorty:
     image: postgres:15.3
     container_name: rick-and-morty-db
@@ -8,15 +19,16 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./postgres:/var/lib/postgresql/data
   cache:
+    container_name: rick-and-morty-redis
     image: redis:6.2-alpine
     restart: always
     ports:
-      - '6379:6379'
+      - 6379:6379
     command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
     volumes: 
       - cache:/data

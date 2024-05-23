@@ -3,7 +3,7 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Character {
+type CharacterSchema {
   gender: String!
   name: String!
   origin: String!
@@ -12,5 +12,5 @@ type Character {
 }
 
 type Query {
-  characters(gender: String, name: String, origin: String, species: String, status: String): [Character!]!
+  characters(gender: String, name: String, origin: String, species: String, status: String): [CharacterSchema!]!
 }
