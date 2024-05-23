@@ -55,7 +55,7 @@ https://github.com/dasanchez11/graphql-rick-morty
 3. Create a **.env** that has the same parameters as the **.env.example** and add environment variables
 
 ```
-BASE_URL = 'http://localhost:4000'
+DB_USERNAME = 'postgres'
 ```
 
 4. Run the app on Docker
