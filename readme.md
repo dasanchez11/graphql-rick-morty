@@ -33,9 +33,9 @@ app/
 
 # Results
 
-## Tests
+## ERD
 
-- Testing Results:
+- ERD diagram:
 
 <p align="left">
   <a target="__blank"><img src="./rickMorty.png" width="600" /></a>
