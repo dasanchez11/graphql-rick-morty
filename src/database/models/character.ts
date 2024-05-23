@@ -24,9 +24,7 @@ export class Character extends Model<
   declare species: string;
   declare origin: string;
   declare gender: string;
-  // createdAt can be undefined during creation
   declare createdAt: CreationOptional<Date>;
-  // updatedAt can be undefined during creation
   declare updatedAt: CreationOptional<Date>;
 }
 

@@ -1,8 +1,9 @@
 import "reflect-metadata";
 
 import { Service } from "typedi";
-import { Character } from "../../database/models/character";
+
 import { CharactersQueryArgsDTO } from "..";
+import { Character } from "../../database/models/character";
 
 @Service()
 export class CharacterService {

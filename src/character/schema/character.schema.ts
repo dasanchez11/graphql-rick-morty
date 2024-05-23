@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class Character {
+export class CharacterSchema {
   @Field()
   name!: string;
   @Field()

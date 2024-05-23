@@ -1,11 +1,10 @@
 import { Args, Query, Resolver } from "type-graphql";
-import { CharactersQueryArgsDTO } from "../Dto";
-import { Character } from "../schema/character.schema";
-import { LogExecutionTime, RedisCache } from "../../shared";
-import { CharacterService } from "../services";
 import { Inject, Service } from "typedi";
+import { CharacterService } from "../services";
+import { CharacterSchema, CharactersQueryArgsDTO } from "..";
+import { LogExecutionTime, RedisCache } from "../../shared";
 @Service()
-@Resolver(() => Character)
+@Resolver(() => CharacterSchema)
 export class CharacterResolver {
   constructor(
     @Inject()
@@ -14,7 +13,7 @@ export class CharacterResolver {
 
   @LogExecutionTime
   @RedisCache()
-  @Query(() => [Character])
+  @Query(() => [CharacterSchema])
   async characters(@Args() filters: CharactersQueryArgsDTO) {
     return this.characterService.queryAll(filters);
   }
