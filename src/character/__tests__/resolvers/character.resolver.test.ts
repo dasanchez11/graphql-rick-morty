@@ -3,12 +3,16 @@ import { CharacterResolver } from "../../resolvers/character.resolver";
 import { CharacterSchema, CharactersQueryArgsDTO } from "../..";
 import { CharacterService } from "../../services";
 
+const mockResult: CharacterSchema[] = [
+  { id: 1, name: "test character" } as unknown as CharacterSchema,
+];
+
 jest.mock("../../services", () => ({
-  CharacterService: jest.fn().mockImplementation(() => {
-    return {
-      queryAll: () => mockResult,
-    };
-  }),
+  CharacterService: jest
+    .fn()
+    .mockImplementation(function (this: CharacterService) {
+      this.queryAll = () => mockResult as any;
+    }),
 }));
 
 jest.mock("type-graphql", () => ({
@@ -22,9 +26,6 @@ jest.mock("typedi", () => ({
   Service: () => jest.fn(),
 }));
 
-const mockResult: CharacterSchema[] = [
-  { id: 1, name: "test character" } as unknown as CharacterSchema,
-];
 jest.mock("../..", () => ({
   CharactersQueryArgsDTO: jest.fn().mockImplementation(() => {
     return {
@@ -52,9 +53,6 @@ jest.mock("../../../shared", () => ({
 }));
 
 describe("character resolver", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
   const mockCharacterService =
     new CharacterService() as jest.Mocked<CharacterService>;
   it("query characters", async () => {

@@ -27,9 +27,6 @@ jest.mock("../..", () => ({
 }));
 
 describe("character service", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
   let filters: CharactersQueryArgsDTO = { name: "test" };
   it("should queryAll", async () => {
     const characterService = new CharacterService();
