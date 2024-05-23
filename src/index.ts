@@ -38,7 +38,7 @@ const executeMain = async () => {
     .start()
     .then(() => {
       app.use(
-        "/graphql",
+        "/",
         cors<cors.CorsRequest>(),
         express.json(),
         expressMiddleware(server, {
@@ -52,7 +52,7 @@ const executeMain = async () => {
     .then(() => {
       const PORT = 3000;
       httpServer.listen({ port: PORT });
-      console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+      console.log(`🚀 Server ready at http://localhost:${PORT}`);
     });
 };
 

@@ -11,7 +11,7 @@
     "db:seed": "sequelize db:seed:all",
     "db:unseed": "sequelize db:seed:undo ",
     "test": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage --watch"
   },
   "keywords": [],
   "author": "",
