@@ -2,6 +2,9 @@ version: '3'
 
 services:
   graphqlapi:
+    depends_on:
+      db:
+        condition: service_healthy
     container_name: rick-and-morty-api
     build:
       context: .
@@ -11,8 +14,12 @@ services:
       - /app/node_modules
     ports:
      - 4000:3000
-    command: npm run start
-  rickAndMorty:
+    command: >
+      sh -c "npm run db:create &&
+             npm run db:migrate &&
+             npm run db:seed &&
+             npm run start"
+  db:
     image: postgres:15.3
     container_name: rick-and-morty-db
     restart: always
@@ -23,6 +30,10 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
   cache:
     container_name: rick-and-morty-redis
     image: redis:6.2-alpine
