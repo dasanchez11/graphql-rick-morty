@@ -53,6 +53,7 @@ https://github.com/dasanchez11/graphql-rick-morty
 ```
 
 3. Create a **.env** that has the same parameters as the **.env.example** and add environment variables
+   if on docker, leave DB_HOST and REDIS_HOST as the example
 
 ```
 DB_USERNAME = 'postgres'
@@ -70,4 +71,33 @@ docker-compose up -d
 http://localhost:4000/
 ```
 
-6. Enjoy
+6. If you don't have docker,
+
+- 1. Start a postgres db
+- 2. Start a redis service
+- 3. map the ports in the env variables
+- 4. run
+
+```
+npm run db:create
+```
+
+- 5. run
+
+```
+npm run db:migrate
+```
+
+- 6. run
+
+```
+npm run db:seed
+```
+
+- 7. run
+
+```
+npm run start
+```
+
+7. Enjoy
